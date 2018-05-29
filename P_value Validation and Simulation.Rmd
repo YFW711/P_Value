@@ -5,9 +5,10 @@
     output: github_document
 ---  
 
-# Simulation is one way to verify p_value
-One question being asked previously is how we evaluate the efficacy of p-value, which means how do we further confirm the provided p-value is able to statistically reject or not reject one null hypothesis - Here I suggest way, Simulation and demo a simple case to demostrate how this approach could verify p_value.
-# t-test with equal sample sizes
+# One way to verify p_value's stability & performance - Simulation 
+One question being asked previously is how we evaluate the efficacy of p-value, which means how do we further confirm the provided p-value is capable to statistically reject or not reject one null hypothesis - Here I suggest one way, simulation,  and demo a simple case to demostrate how this approach could verify p_value. Find the following steps for your reference - 
+# T-test with equal sample sizes
+Let's take t-test as the example to see what p-value represents here - give the following histogram, you can see the red-labeled parts indicating the probability of when p-value <=0.05, which is 0.04(0.8/20). There is 4% of chance that p-value will be equal or less than 0.05, representating the the prob of Type I error as well. Here we can see 4% is somewhat closer to what we expect on the significance level, 0.05 - so, this equal sample size t-test is somewhat fair. 
 ```{r}
 rep <- 1e4
 mu1 <- 5
@@ -29,8 +30,8 @@ hist(pval, freq = FALSE, breaks = seq(0, 1, 0.05), col = c("red", rep("white", 1
      main = "Distribution of p-values\nfor t-test with equal sample size")
 ```
 
-# t-test with unequal sample sizes
-Here we simulate the results of t-test under the condition with 2 unequal sample sizes, and we would like to see how it could affect the performance of p-value - From the follwing plot about the distribution of simulated p-values for t-test with this case, one can find that given the p-value less or equal than 0.05, the probability would be roughly around 0.005(0.1/20). Based on the ideal scenario, if a null hypothesis is being not rejected, the probability of p-value <= 0.05 should be also around 0.05. In other words, the probability of p-value <= 0.05 is the one of Type I error(Null hypothesis is correct but being rejected). Thus, our results showed this unequal sample size approach does lower the chance of Type I error, at the same time, increase the chance of Type II error theorically(cause alternative hypothesis is being verified, we tend to fail to reject hull hypothesis)
+# T-test with unequal sample sizes
+Here we simulate the results of t-test under the condition with 2 unequal sample sizes, and we would like to see how it could affect the performance of p-value - From the follwing plot about the distribution of simulated p-values for t-test with this case, one can find that given the p-value less or equal than 0.05, the probability would be roughly around 0.005(0.1/20). Based on the ideal scenario, if a null hypothesis is being not rejected, the probability of p-value <= 0.05 should be also around 0.05. In other words, the probability of p-value <= 0.05 is the one of Type I error(Null hypothesis is correct but being rejected). Thus, our results showed this unequal sample size approach does lower the chance of Type I error, at the same time, increase the chance of Type II error theorically(cause alternative hypothesis is being verified, we tend to fail to reject hull hypothesis).
 ```{r}
 rep <- 1e4
 mu1 <- 5
@@ -52,4 +53,5 @@ hist(pval, freq = FALSE, breaks = seq(0, 1, 0.05), col = c("red", rep("white", 1
      main = "Distribution of p-values\nfor t-test with unequal sample size")
 ```
 
-
+# Conclusion 
+Ideally, we wish to see that the probability of p-value <= 0.05 given the simulation should be somewhat close to 0.05, like the results we get from t-test with equal sample size. But we can see that the one with unequal sample size shows more conservative results by the simulation, higher the chance of Type II error and lower the chance of Type I error. 
