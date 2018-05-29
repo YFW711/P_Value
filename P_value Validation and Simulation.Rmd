@@ -6,7 +6,9 @@
 ---  
 
 # One way to verify p_value's stability & performance - Simulation 
-One question being asked previously is how we evaluate the efficacy of p-value, which means how do we further confirm the provided p-value is capable to statistically reject or not reject one null hypothesis - Here I suggest one way, simulation,  and demo a simple case to demostrate how this approach could verify p_value. Find the following steps for your reference - 
+One question being asked previously is how we evaluate the efficacy of p-value, which means how do we further confirm the provided p-value is capable to statistically reject or not reject one null hypothesis - Here I suggest one way, simulation,  and demo a simple case to demostrate how this approach could verify p_value. Find the following steps for your reference
+
+
 # T-test with equal sample sizes
 Let's take t-test as the example to see what p-value represents here - give the following histogram, you can see the red-labeled parts indicating the probability of when p-value <=0.05, which is 0.04(0.8/20). There is 4% of chance that p-value will be equal or less than 0.05, representating the the prob of Type I error as well. Here we can see 4% is somewhat closer to what we expect on the significance level, 0.05 - so, this equal sample size t-test is somewhat fair. 
 ```{r}
