@@ -8,7 +8,6 @@
 # t-test with equal sample sizes
 
 ```{r}
-
 rep <- 1e4
 mu1 <- 5
 mu2 <- 5
