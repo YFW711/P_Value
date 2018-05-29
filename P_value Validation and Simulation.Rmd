@@ -1,0 +1,57 @@
+---  
+    title: "P_value Validation and Simulation"  
+    author: "Evan YF W."  
+    date: "`r format(Sys.Date())`"
+    output: github_document
+---  
+
+# t-test with equal sample sizes
+
+```{r}
+
+rep <- 1e4
+mu1 <- 5
+mu2 <- 5
+sigma <- 2
+n1 <- 10
+n2 <- 10
+tval <- numeric(rep)
+pval <- numeric(rep)
+
+for(i in 1 :rep){
+  x1 <- rnorm(n1, mu1, sigma)
+  x2 <- rnorm(n2, mu2, sigma)
+  S <- sqrt(((n1 - 1) * var(x1) + (n2 - 1) * var(x2)) / (n1 + n2 - 2))
+  tval[i] <- (mean(x1) - mean(x2)) / (S * sqrt(1 / n1 + 1 / n2))
+  pval[i] <- 2 * pt(abs(tval[i]), df = min(n1, n2) - 1, lower = FALSE)
+}
+hist(pval, freq = FALSE, breaks = seq(0, 1, 0.05), col = c("red", rep("white", 19)),
+     main = "Distribution of p-values\nfor t-test with equal sample size")
+```
+
+# t-test with unequal sample sizes
+
+```{r}
+
+rep <- 1e4
+mu1 <- 5
+mu2 <- 5
+sigma <- 2
+n1 <- 5
+n2 <- 50
+tval <- numeric(rep)
+pval <- numeric(rep)
+
+for(i in 1 :rep){
+  x1 <- rnorm(n1, mu1, sigma)
+  x2 <- rnorm(n2, mu2, sigma)
+  S <- sqrt(((n1 - 1) * var(x1) + (n2 - 1) * var(x2)) / (n1 + n2 - 2))
+  tval[i] <- (mean(x1) - mean(x2)) / (S * sqrt(1 / n1 + 1 / n2))
+  pval[i] <- 2 * pt(abs(tval[i]), df = min(n1, n2) - 1, lower = FALSE)
+}
+hist(pval, freq = FALSE, breaks = seq(0, 1, 0.05), col = c("red", rep("white", 19)),
+     main = "Distribution of p-values\nfor t-test with unequal sample size")
+
+```
+
+
