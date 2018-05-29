@@ -2,9 +2,7 @@
     title: "P_value Validation and Simulation"  
     author: "Evan YF W."  
     date: "`r format(Sys.Date())`"
-    output: 
-      html_document:
-      keep_md: true
+    output: github_document
 ---  
 
 # Simulation is one way to verify p_value
